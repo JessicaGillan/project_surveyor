@@ -2,7 +2,7 @@ class SurveysController < ApplicationController
 
 #show edit new index
   def index
-    
+    @surveys = Survey.all
   end
 
   def create

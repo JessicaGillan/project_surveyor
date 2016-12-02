@@ -1,0 +1,9 @@
+<% flash.each do |message_type, messages| %>
+  <% if messages.is_a? String %>
+  <%= messages %>
+  <% else %>
+  <% messages.each do |message| %>
+  <strong><%= message_type %>! <%= message %></strong>
+  <% end %>
+  <% end %>
+<% end %>
