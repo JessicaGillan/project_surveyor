@@ -1,0 +1,35 @@
+Survey(has many Questions)
+  id
+  title:string
+  accepts_nested_attributes_for questions
+
+  inverse_of :questions
+
+  has_many_questions :depend => destroy
+
+Questions(belongs to Survey, has many options)
+  id
+  survey_id
+  text:text
+
+  accepts_nested_attributes_for Options
+
+  inverse_of :survey
+  inverse_of :options
+
+  has_many_options :depend => destroy
+
+Options(belongs to questions)
+  question_id
+  text:text
+
+  inverse_of :questions
+
+----------
+
+Have a form for the survey with many questions
+
+----------
+Multiple choice question has many options
+
+----------
