@@ -29,7 +29,14 @@ class SurveysController < ApplicationController
   end
 
   def update
-    #
+    @survey = Survey.find_by_id( params[:id] )
+    if @survey.update( survey_params )
+      flash[:success] = "Survey Created!"
+      redirect_to @survey
+    else
+      flash.now[:error] = "Try again!"
+      render :new
+    end
   end
 
   def edit
