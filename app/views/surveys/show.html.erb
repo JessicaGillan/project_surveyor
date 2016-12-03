@@ -1,2 +1,6 @@
 
-<%= @survey.title %>
+<h2><%= @survey.title %></h2>
+
+<% @survey.questions.each do |q| %>
+ <%= render partial: 'questions/question', locals: { questions: q } %>
+<% end %>

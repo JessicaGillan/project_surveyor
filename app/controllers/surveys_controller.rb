@@ -22,7 +22,7 @@ class SurveysController < ApplicationController
   end
 
   def show
-    #
+    @survey = Survey.find_by_id( params[:id] )
   end
 
   def update
@@ -39,6 +39,10 @@ class SurveysController < ApplicationController
 
   private
     def survey_params
-      #
+      params.require(:survey)
+            .permit( :title,
+                     { questions_attributes: [ :question,
+                                              :survey_id, :id,
+                                              :_destroy ] } )
     end
 end
