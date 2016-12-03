@@ -1,21 +1,25 @@
-<h2>Create New Survey</h2>
-
 <%= form_for(@survey) do |surveys_builder| %>
   <%= surveys_builder.label :title %>
   <%= surveys_builder.text_field :title %>
 
   <h3>Questions</h3>
     <%= surveys_builder.fields_for :questions do |question_fields| %>
-      <%= question_fields.label :question %>
-      <%= question_fields.text_field :question %>
-      <br>
+    <%= question_fields.label :question %>
+    <%= question_fields.text_field :question %>
       <% if question_fields.object.persisted? %>
+      <br>
         <%= question_fields.label :_destroy, "Delete This Question?" %>
         <%= question_fields.check_box :_destroy %>
       <% end %>
       <br>
+<br>
+      <%= question_fields.fields_for :options do |option_field| %>
+        <%= option_field.label :text %>
+        <%= option_field.text_field :text %>
+        <br>
+      <% end %>
     <% end %>
-
+<br>
       <%= surveys_builder.submit "Create Survey" %>
 
 <% end %>

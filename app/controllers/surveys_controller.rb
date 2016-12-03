@@ -18,7 +18,10 @@ class SurveysController < ApplicationController
 
   def new
     @survey = Survey.new
-    @survey.questions.build
+    4.times do
+      a = @survey.questions.build
+      4.times { a.options.build }
+    end
   end
 
   def show
@@ -29,7 +32,7 @@ class SurveysController < ApplicationController
     #
   end
 
-  def update
+  def edit
     #
   end
 
