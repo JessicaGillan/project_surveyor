@@ -33,7 +33,11 @@ class SurveysController < ApplicationController
   end
 
   def edit
-    #
+    @survey = Survey.find_by_id( params[:id] )
+    4.times do
+      a = @survey.questions.build
+      4.times { a.options.build }
+    end
   end
 
   def destroy

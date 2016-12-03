@@ -14,10 +14,11 @@
       <br>
 <br>
       <%= question_fields.fields_for :options do |option_field| %>
-        <%= option_field.label :text %>
+        <%= option_field.label :text, "Option " %>
         <%= option_field.text_field :text %>
         <br>
       <% end %>
+      <br>
     <% end %>
 <br>
       <%= surveys_builder.submit "Create Survey" %>
