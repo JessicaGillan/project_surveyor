@@ -10,29 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161202223608) do
+ActiveRecord::Schema.define(version: 20161206191108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "options", force: :cascade do |t|
-    t.text     "text"
-    t.integer  "question_id"
+    t.text     "body"
+    t.integer  "question_id", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_options_on_question_id", using: :btree
+  end
+
+  create_table "question_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "questions", force: :cascade do |t|
-    t.text     "question"
-    t.integer  "survey_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "body"
+    t.integer  "survey_id",        null: false
+    t.integer  "question_type_id", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.boolean  "required"
+    t.index ["survey_id"], name: "index_questions_on_survey_id", using: :btree
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "question_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_responses_on_question_id", using: :btree
   end
 
   create_table "surveys", force: :cascade do |t|
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
+  add_foreign_key "options", "questions"
+  add_foreign_key "questions", "surveys"
+  add_foreign_key "responses", "questions"
 end

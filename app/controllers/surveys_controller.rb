@@ -1,27 +1,22 @@
 class SurveysController < ApplicationController
 
-#show edit new index
   def index
     @surveys = Survey.all
   end
 
   def create
-    @survey = Survey.new(survey_params)
+    @survey = Survey.new( survey_params )
     if @survey.save
       flash[:success] = "Survey Created!"
-      redirect_to @survey
+      redirect_to new_survey_question_path @survey
     else
-      flash.now[:error] = "Try again!"
+      flash.now[:error] = "Sorry, we couldn't save your survey due to errors."
       render :new
     end
   end
 
   def new
     @survey = Survey.new
-    4.times do
-      a = @survey.questions.build
-      4.times { a.options.build }
-    end
   end
 
   def show
@@ -31,20 +26,16 @@ class SurveysController < ApplicationController
   def update
     @survey = Survey.find_by_id( params[:id] )
     if @survey.update( survey_params )
-      flash[:success] = "Survey Created!"
+      flash[:success] = "Survey Updated!"
       redirect_to @survey
     else
-      flash.now[:error] = "Try again!"
+      flash.now[:error] = "We couldn't update your survey."
       render :new
     end
   end
 
   def edit
     @survey = Survey.find_by_id( params[:id] )
-    4.times do
-      a = @survey.questions.build
-      4.times { a.options.build }
-    end
   end
 
   def destroy
@@ -55,8 +46,10 @@ class SurveysController < ApplicationController
     def survey_params
       params.require(:survey)
             .permit( :title,
-                     { questions_attributes: [ :question,
-                                              :survey_id, :id,
-                                              :_destroy ] } )
+                     :description,
+                     { question: [ :id, :body,
+                                   :survey_id,
+                                   :required,
+                                   :_destroy ] } )
     end
 end

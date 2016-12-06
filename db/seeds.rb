@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "Destroying database."
+
+Survey.destroy_all
+QuestionType.destroy_all
+
+MULTIPLIER = 10
+
+puts "Creating Question Types"
+
+q_types = ["Multiple Choice"]
+q_types.each do |t|
+  QuestionType.create( name: t )
+end
+
+puts "Database Seeded."

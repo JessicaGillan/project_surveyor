@@ -1,0 +1,16 @@
+<%= render partial: 'shared/survey_builder', locals: { survey: @survey } %>
+<hr>
+
+<% case @q_type %>
+<% when "Multiple Choice" %>
+  <%= render partial: 'questions/mc_question_options', locals: {
+                                                    survey:         @survey,
+                                                    question:       @question,
+                                                  } %>
+<% else %>
+  <p>Error, unknown question type</p>
+<% end %>
+
+<hr>
+
+<%= render partial: 'questions/show_questions', locals: { questions: @survey.questions } %>

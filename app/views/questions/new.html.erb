@@ -1,0 +1,12 @@
+<%= render partial: 'shared/survey_builder', locals: { survey: @survey } %>
+<hr>
+
+<%= render partial: 'questions/add_question', locals: {
+                                                survey:         @survey,
+                                                question:       @question,
+                                                question_types: @question_types
+                                              } %>
+
+<hr>
+
+<%= render partial: 'questions/show_questions', locals: { questions: @survey.questions } %>

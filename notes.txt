@@ -7,10 +7,11 @@ Survey(has many Questions)
 
   has_many_questions :depend => destroy
 
-Questions(belongs to Survey, has many options)
+Questions(belongs to Survey, has many options, has_many responses)
   id
   survey_id
   text:text
+  type:text
 
   accepts_nested_attributes_for Options
 
@@ -19,11 +20,27 @@ Questions(belongs to Survey, has many options)
 
   has_many_options :depend => destroy
 
-Options(belongs to questions)
+QuestionType
+  id
+  name:string
+  Foreign key: question_id
+
+ResponseOptions(belongs to questions)
+  id
   question_id
   text:text
 
   inverse_of :questions
+
+  Options can be multiple choice, text field,
+                Multiple allowed checked options,
+                required or not
+
+Response (belongs_to questions)
+  id
+  question_id
+  text:text
+
 
 ----------
 

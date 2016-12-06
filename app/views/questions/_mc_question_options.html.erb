@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-4">
+    <h3>Add a Multiple Choice Question:</h3>
+
+    <%= form_for [survey, question] do |f| %>
+      <p><em>How many options should the question have?</em></p>
+
+      <p><em>How many options can be selected?</em></p>
+
+      <p><em>Is the question required?</em></p>
+      <%= f.submit( "Add a New Question",
+                                class: "btn btn-primary" ) %>
+    <% end %>
+  </div>
+</div>
