@@ -1,1 +1,24 @@
-<h1>Survey Editer</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+     <h1>Survey Builder</h1>
+
+      <%= render partial: 'shared/errors', locals: { object: @survey } %>
+      <%= render partial: 'survey_form', locals: { survey: @survey } %>
+
+      <hr>
+
+      <%= render partial: 'questions/add_question', locals: {
+                                                      survey:         @survey,
+                                                      question:       @question,
+                                                      question_types: question_type_options
+                                                    } %>
+
+      <hr>
+
+      <%= render partial: 'questions/show_questions', locals: { survey: @survey,
+                                                                questions: @survey.questions } %>
+                                                                <hr>
+
+
+  </div>
+</div>

@@ -1,4 +1,8 @@
 class Question < ApplicationRecord
+  # Declare so they can be passed in form_for parameters.
+  # NOT included in database
+  attr_accessor :option_num
+
   belongs_to :survey, inverse_of: :questions
   belongs_to :question_type
 

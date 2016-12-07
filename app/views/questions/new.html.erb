@@ -1,12 +1,24 @@
-<%= render partial: 'shared/survey_builder', locals: { survey: @survey } %>
-<hr>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
 
-<%= render partial: 'questions/add_question', locals: {
-                                                survey:         @survey,
-                                                question:       @question,
-                                                question_types: @question_types
-                                              } %>
+    <%= render partial: 'shared/survey_builder', locals: { survey: @survey } %>
+    <hr>
 
-<hr>
+    <%= render partial: 'questions/add_question', locals: {
+                                                    survey:         @survey,
+                                                    question:       @question,
+                                                    question_types: question_type_options
+                                                  } %>
 
-<%= render partial: 'questions/show_questions', locals: { questions: @survey.questions } %>
+    <hr>
+
+    <%= render partial: 'questions/show_questions', locals: { survey: @survey,
+                                                              questions: @survey.questions } %>
+                                                              <hr>
+
+    <%= form_tag(root_path, method: "get") do %>
+      <%= submit_tag("Finish Building Survey and Return",
+                                class: "btn btn-primary") %>
+    <% end %>
+  </div>
+</div>

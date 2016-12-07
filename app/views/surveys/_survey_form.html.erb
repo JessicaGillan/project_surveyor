@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-12">
     <%= form_for( survey ) do |surveys_builder| %>
       <%= surveys_builder.label       :title, "Survey Title" %>
       <%= surveys_builder.text_field  :title,
@@ -11,8 +11,9 @@
                                       placeholder: "e.g. \"Discovering what is unique about the humans.\"",
                                       class: 'form-control'%>
 
-      <%= surveys_builder.submit "Create Survey and Begin Adding Questions",
-                                  class: "btn btn-primary" %>
+      <%= surveys_builder.submit(
+            (survey.persisted? ? "Edit Survey" : "Create Survey and Begin Adding Questions"),
+                                  class: "btn btn-primary" )%>
     <% end %>
   </div>
 </div>

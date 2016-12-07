@@ -1,25 +1,22 @@
-<h4><%= question.question %></h4>
 
-<%= question.options.each do |option| %>
- <%= option.text %>
-<% end %>
+<% questions.each_with_index do |q, n| %>
+  <% next unless q.persisted? %>
 
-<h3>Questions</h3>
-  <%= surveys_builder.fields_for :questions do |question_fields| %>
-  <%= question_fields.label :question %>
-  <%= question_fields.text_field :question %>
-    <% if question_fields.object.persisted? %>
-    <br>
-      <%= question_fields.label :_destroy, "Delete This Question?" %>
-      <%= question_fields.check_box :_destroy %>
-    <% end %>
-    <br>
-<br>
-    <%= question_fields.fields_for :options do |option_field| %>
-      <%= option_field.label :text, "Option " %>
-      <%= option_field.text_field :text %>
-      <br>
-    <% end %>
-    <br>
+  <h4><%= "#{n+1}. #{q.body}?" %></h4>
+
+  <p>
+    <em><%= q.required ? "Required. " : "Optional. "%></em>
+    <em><%= select_type_text(q) %></em>
+  </p>
+
+  <% unless q.options.empty? %>
+    <ol type="A">
+      <% q.options.each do |option| %>
+      <li><%= option.body %></li>
+      <% end %>
+    </ol>
   <% end %>
-<br>
+
+  <%= link_to "Remove Question", survey_question_path(survey, q), method: :delete %>
+
+<% end %>

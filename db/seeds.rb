@@ -11,13 +11,31 @@ puts "Destroying database."
 Survey.destroy_all
 QuestionType.destroy_all
 
-MULTIPLIER = 10
+N = 10
 
 puts "Creating Question Types"
 
-q_types = ["Multiple Choice"]
+q_types = ["Multiple Choice", "Multiple Select"]
 q_types.each do |t|
   QuestionType.create( name: t )
+end
+
+puts "Creating Surveys"
+
+N.times do
+  Survey.create( title: Faker::Company.name, description: Faker::Company.catch_phrase)
+end
+
+Survey.all.each do |s|
+  N.times do
+    s.questions << Question.create( body: Faker::Company.catch_phrase )
+  end
+
+  s.questions.each do |q|
+    4.times do
+      q.options << Option.create( body: Faker::Company.buzzword )
+    end
+  end
 end
 
 puts "Database Seeded."

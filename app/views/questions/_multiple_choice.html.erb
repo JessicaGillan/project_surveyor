@@ -1,0 +1,11 @@
+<% if @question.options.empty? %>
+  <%= render partial: 'questions/mc_question_settings',
+             locals: { survey:   @survey,
+                       question: @question
+                     } %>
+<% else %>
+  <%= render partial: 'questions/mc_question_add_options',
+             locals: { survey:   @survey,
+                       question: @question
+                     } %>
+<% end %>

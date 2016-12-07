@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-12">
+    <h3>Add a Multiple Choice Question:</h3>
+
+    <p><em>Next, add the text for each of your options.</em></p>
+
+    <%= form_for [survey, question] do |q_builder| %>
+
+      <%= q_builder.label      :body, "What is your question?" %>
+      <%= q_builder.text_field :body,
+                       placeholder: "e.g. What's your animal?",
+                       class: 'form-control' %>
+
+      <% n = 1 %>
+      <%= q_builder.fields_for :options do |opt_fields| %>
+
+          <%= opt_fields.label      :body, "Option #{n}:" %>
+          <%= opt_fields.text_field :body,
+                                    placeholder: "e.g. Turducken",
+                                    class:       'form-control' %>
+          <% n += 1 %>
+      <% end %>
+
+      <%= q_builder.submit( "Add Question",
+                    class: "btn btn-primary" ) %>
+    <% end %>
+
+    <%= link_to "Back to Previous Step", edit_survey_question_path(survey, question, ) %>
+  </div>
+</div>

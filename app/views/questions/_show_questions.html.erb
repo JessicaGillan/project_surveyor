@@ -1,8 +1,12 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-12">
     <h3>Existing Questions:</h3>
-    <% if questions.empty? %>
-    <p>There are no questions yet!</p>
+
+    <% if questions.length == 1 %>
+      <p>There are no questions yet!</p>
+    <% else %>
+      <%= render partial: 'questions/question', locals: { questions: questions,
+                                                          survey: survey } %>
     <% end %>
   </div>
 </div>

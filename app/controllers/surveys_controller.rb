@@ -36,10 +36,19 @@ class SurveysController < ApplicationController
 
   def edit
     @survey = Survey.find_by_id( params[:id] )
+    @question = @survey.questions.build
   end
 
   def destroy
-    #
+    @survey = Survey.find_by_id( params[:id] )
+
+    if @question.destroy
+      flash[:success] = "Survey deleted."
+      redirect_to root_path
+    else
+      flash[:error] = "Oops. We messed. Couldn't delete the survey."
+      redirect_to root_path
+    end
   end
 
   private

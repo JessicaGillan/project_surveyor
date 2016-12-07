@@ -47,6 +47,7 @@ group :development do
   gem 'better_errors'
   gem 'jazz_fingers'
   gem 'binding_of_caller'
+  gem 'faker'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

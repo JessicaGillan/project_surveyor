@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12">
+    <h3>Add a Multiple Choice Question:</h3>
+
+    <%= form_for [survey, question] do |f| %>
+
+      <p><em>How many options should the question have?</em></p>
+      <%= select_tag :option_num, options_for_select((1..10).map {|i| [i,i] } ) %>
+
+      <p><em>How many options can be selected?</em></p>
+      <%= f.radio_button(:question_type_id, q_type_id_for("Multiple Choice") ) %> One <br>
+      <%= f.radio_button(:question_type_id, q_type_id_for("Multiple Select") ) %> Multiple <br>
+
+      <p><em>Is the question required?</em></p>
+      <%= f.radio_button(:required, true) %> Yes <br>
+      <%= f.radio_button(:required, false) %> No <br>
+
+      <br>
+      <%= f.submit( "Continue to the Next Step",
+                    class: "btn btn-primary" ) %>
+    <% end %>
+  </div>
+</div>
